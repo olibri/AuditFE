@@ -1,0 +1,21 @@
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+
+}
+.action {
+min-width: 150px;
+}
+
+i{
+  padding: 10px;
+  color: black;
+}
+i:hover {
+  color: #a4b600;
+}
+.btn{
+  margin: 0 20px 5px 20px;
+}

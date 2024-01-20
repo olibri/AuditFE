@@ -1,0 +1,64 @@
+
+<div class="d-flex justify-content-center p-4">
+  <table class="table table-striped table-bordered custom-table">
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+        <th scope="col">Time of creating</th>
+        <th scope="col">Type audit</th>
+        <th scope="col">Goal of audit</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Users who checked it</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data" [routerLink]="['/discripency', item.id]">
+        <th scope="row" >{{item.id}}</th>
+        <td>{{item.timeOfCreating}}</td>
+        <td>{{item.typeOfAudit}}</td>
+        <td>{{item.goalOfAudit}}</td>
+        <td>{{item.branch.unitBranch}} {{item.branch.subUnitBranch}} {{item?.branch?.departmentBranch}} </td>
+        <td >{{getAllEmails(item.auditUser.$values)}}</td>
+        <td [ngStyle]="{'color':getStatusColor(item.statusName)}">{{item.statusName}}</td>
+
+        <td (click)="$event.stopPropagation()">
+
+        <a [routerLink]="item.statusName !== 'Closed' ? ['/audit/edit', item.id] : null"
+          [class.disabled-link]="item.statusName === 'Closed'"
+          (click)="item.statusName === 'Closed' && $event.preventDefault()"
+          [attr.data-bs-toggle]="item.statusName === 'Closed' ? 'tooltip' : null"
+          [attr.data-bs-placement]="item.statusName === 'Closed' ? 'top' : null"
+          [attr.title]="item.statusName === 'Closed' ? 'Editing is not allowed for closed audits' : 'Edit audit'">
+         <i class="bi bi-pencil-square"></i>
+        </a>
+
+          <!-- <a [routerLink]="['/audit/edit', item.id]" [class.disabled]="item.statusName === 'Closed'"
+           [title]="item.statusName === 'Closed' ? 'Editing is not allowed for closed audits' : 'Edit audit'">
+            <i class="bi bi-pencil-square" ></i>
+          </a> -->
+
+          <a (click)="open(content, item.id)"[attr.title]="'Delete audit'">
+            <i class="bi bi-trash"></i>
+          </a>
+
+          <a [routerLink]="['/descripency/',item.id,'create']"
+            [attr.title]="'Create new discripency'">
+            <i class="bi bi-file-earmark-plus"></i>
+          </a>
+           <a href="#"><i class="bi bi-download"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <button type="button" class="btn btn-danger" (click)="modal.close(onSubmit())" >Delete</button>
+</ng-template>
+<div *ngIf="closeResult">{{closeResult}}</div>

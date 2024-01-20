@@ -1,0 +1,47 @@
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="mb-4">Registration Form</h2>
+      <form (ngSubmit)="onSubmit()" >
+        <div class="mb-3">
+          <label for="username" class="form-label">Full name</label>
+          <input type="text" class="form-control" id="username" required [(ngModel)]="user.fullName" name="fullName">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" required [(ngModel)]="user.email" name="email">
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="user.password" (blur)="touchedField()" name="password">
+          <small class="form-text" *ngIf="!isPasswordStrong()&& FieldTouched">Password is weak</small>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" (blur)="onPasswordChange()" id="confirmPassword" required [(ngModel)]="confirmPassword" name="confirmPassword">
+          <small class="form-text" *ngIf="!onPasswordChange()">Wrong password</small>
+        </div>
+
+        <div class="mb-3">
+          <ng-select [(ngModel)]="user.branchId" name="branchId" placeholder='Choose unit'>
+            <ng-option *ngFor="let branch of branches" [value]="branch.id">{{branch.unitBranch}}</ng-option>
+          </ng-select>
+        </div>
+
+        <div class="mb-3">
+          <ng-select [(ngModel)]="user.positionId" name="positionId" placeholder='Choose position'>
+            <ng-option *ngFor="let position of positions" [value]="position.id">{{position.nameOfPosition}}</ng-option>
+          </ng-select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!onPasswordChange()">Register</button>
+        <small class="form-text" style="margin-left: 8px;" *ngIf="!validation">Please fill in all fields</small>
+      </form>
+    </div>
+  </div>
+</div>

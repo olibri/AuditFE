@@ -1,0 +1,23 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Встановлює мінімальну висоту контейнера, щоб він займав весь висоту вікна переглядача */
+}
+
+form {
+  width: 100%; /* або максимальна ширина, яку ви хочете встановити для форми */
+  max-width: 400px; /* Приклад максимальної ширини */
+}
+.form-group{
+  margin-top: 20px;
+}
+button{
+  margin-top: 10px;
+}
+.form-text{
+  color: rgb(35, 134, 255);
+}
+.error-message{
+  color: red;
+}

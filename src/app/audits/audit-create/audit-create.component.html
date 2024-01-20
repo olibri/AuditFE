@@ -1,0 +1,48 @@
+<form  (ngSubmit)="onSubmit()"  #auditForm="ngForm">
+  <legend>Create Audit</legend>
+  <div class="mb-3">
+
+    <ng-select [(ngModel)]="auditData.typeOfAudit" name="typeOfAudit" required placeholder='Choose type'>
+      <ng-option [value]="'Unscheduled'">Unscheduled</ng-option>
+      <ng-option [value]="'Scheduled'">Scheduled</ng-option>
+   </ng-select>
+  </div>
+
+  <div class="mb-3">
+      <input class="form-control" id="myText" (input)="preventDoubleSpace($event)"  (keyup)="updateWordCount()"
+          type="text" [(ngModel)]="auditData.goalOfAudit" required ngModel minlength="10"
+          name="goalOfAudit" #inputRef="ngModel" placeholder="Goal Of Audit">
+      <small id="wordCount">Character Count: {{ minlength }}</small>
+
+      <small class="form-text" *ngIf="inputRef.errors">
+        Minimum length required is 10 characters.
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="date" [(ngModel)]="auditData.timeOfCreating" required name="timeOfCreating" >
+    </div>
+
+    <div class="mb-3">
+        <ng-select [(ngModel)]="auditData.branchId" name="branchId" placeholder='Choose unit' required>
+          <ng-option *ngFor="let branch of branches" [value]="branch.id">{{branch.unitBranch}}</ng-option>
+        </ng-select>
+    </div>
+    <div class="mb-3">
+    <ng-select [items]="users"
+      bindLabel="fullName"
+      bindValue="id"
+      [(ngModel)]="selectedCars"
+      name="selectedCars"
+      [multiple]="true"
+      placeholder='Choose users' required>
+   </ng-select>
+  </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!auditForm.form.valid">Submit</button>
+    <small *ngIf="!auditForm.valid" class="form-text">You have to fill these</small>
+</form>
+
+
+
+
+

@@ -1,0 +1,57 @@
+
+<form  (ngSubmit)="onSubmit()">
+  <legend>Edit Audit</legend>
+  <div class="mb-3">
+
+    <ng-select [(ngModel)]="discrepanciesData.discrepancyType" name="discrepancyType" placeholder='Choose type'>
+      <ng-option [value]="'Essential'">Essential</ng-option>
+      <ng-option [value]="'Insignificant'">Insignificant</ng-option>
+   </ng-select>
+  </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="text" [(ngModel)]="discrepanciesData.anotherDiscrepancyRequirements" name="anotherDiscrepancyRequirements"
+      placeholder="Another Discrepancy Requirements">
+    </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="text" [(ngModel)]="discrepanciesData.descriptionOfDiscrepancy" name="descriptionOfDiscrepancy"
+       placeholder="Description of discrepancy">
+    </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="date" [(ngModel)]="discrepanciesData.dateOfDetection" name="dateOfDetection" >
+    </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="text" [(ngModel)]="discrepanciesData.reasonOfDiscrepancy" name="reasonOfDiscrepancy"
+       placeholder="Reason of discrepancy">
+    </div>
+
+    <div class="mb-3">
+      <input class="form-control" type="date" [(ngModel)]="discrepanciesData.dateOfContorolNoticed" name="dateOfContorolNoticed" >
+    </div>
+
+    <div class="mb-3">
+        <ng-select [(ngModel)]="discrepanciesData.statusId" name="statusId" placeholder='Choose status'>
+          <ng-option *ngFor="let sts of status" [value]="sts.id">{{sts.name}}</ng-option>
+        </ng-select>
+    </div>
+    <div class="mb-3">
+
+    <ng-select [items]="iso"
+      bindLabel="isoName"
+      bindValue="id"
+      [(ngModel)]="selectedIso"
+      name="selectedIso"
+      [multiple]="true"
+      placeholder='Choose isos'>
+   </ng-select>
+  </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- <p>{{AuditId}}</p> -->
+

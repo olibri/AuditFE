@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center p-4">
+  <table class="table table-striped table-bordered custom-table">
+    <thead>
+      <tr>
+
+        <th scope="col">№</th>
+        <th scope="col">Iso Directory</th>
+        <th scope="col">Type discrepancy</th>
+        <th scope="col">Another Discrepancy Requirements</th>
+        <th scope="col">Description Of Discrepancy</th>
+        <th scope="col">Date Of Detection it</th>
+        <th scope="col">Reason Of Discrepancy</th>
+        <th scope="col">Date Of Contorol Noticed</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+
+        <th scope="row" >{{item.id}}</th>
+        <td>{{getIso(item.isoDiscrepancy.$values)}}</td>
+
+        <td>{{item.discrepancyType}}</td>
+        <td>{{item.anotherDiscrepancyRequirements}}</td>
+        <td>{{item.descriptionOfDiscrepancy}} </td>
+        <td >{{item.dateOfDetection}}</td>
+        <td >{{item.reasonOfDiscrepancy}}</td>
+        <td >{{item.dateOfContorolNoticed}}</td>
+        <td >{{item.status.name}}</td>
+
+        <td class="action">
+          <a [routerLink]="item.status.name !== 'Closed' ? ['/descripency/',auditIdnumber,'edit', item.id] : null"
+          [class.disabled-link]="item.status.name === 'Closed'"
+          (click)="item.status.name === 'Closed' && $event.preventDefault()"
+          [attr.data-bs-toggle]="item.status.name === 'Closed' ? 'tooltip' : null"
+          [attr.data-bs-placement]="item.status.name === 'Closed' ? 'top' : null"
+          [attr.title]="item.status.name === 'Closed' ? 'Editing is not allowed for closed audits' : 'Edit audit'">
+         <i class="bi bi-pencil-square"></i>
+        </a>
+
+        <a (click)="open(content, item.id)"[attr.title]="'Delete descripency'">
+          <i class="bi bi-trash"></i>
+        </a>
+       </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <button type="button" class="btn btn-danger" (click)="modal.close(onSubmit())" >Delete</button>
+</ng-template>
+<div *ngIf="closeResult">{{closeResult}}</div>
