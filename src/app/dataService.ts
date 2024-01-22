@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 })
 export class DataService
 {
-  private url = "http://localhost:5017";
+  // private url = "http://localhost:5017";
+  private url = "https://localhost:51276";
 
   public loginChecked :boolean = false;
   private jwtService: JwtHelperService = new JwtHelperService();

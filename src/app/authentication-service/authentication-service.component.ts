@@ -69,6 +69,7 @@ export class AuthenticationServiceComponent implements OnInit{
     if(Object.values(this.user).every(value => value !== null && value !== '')){
       this.validation = true;
       this.dataService.authenticationService(this.user).pipe(takeUntil(this.destroy$)).subscribe();
+      console.log("Destroy")
       this.router.navigate(['/login']);
       this.dataService.logout();
     }
